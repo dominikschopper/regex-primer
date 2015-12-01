@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Regular Expressions Primer</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="./css/side-menu.css">
+	<style>
+		/* styling some basic html */
+		h1, h2, h3, h4 {
+			margin-bottom: 0.5em;
+		}
+
+
+		/* overwriting a bit of pure defaults (i like green better than blue ;) */
+		#main a, #main a:visited, #main a:active, #main a:link {
+			text-decoration: none;
+			color: darkgreen;
+			font-style: italic;
+			font-weight: bold;
+			padding: 0 0.15em;
+		} 
+		#main a:hover {
+			font-style: normal;
+			background-color: darkgreen;
+			color: white;	
+		}
+		
+		#menu .pure-menu-selected, #menu .pure-menu-heading {
+			background-color: darkgreen;
+		}
+
+		.pure-menu-list .pure-menu-list {
+			font-size: 0.85em;
+		}
+
+		.pure-menu-list .pure-menu-list > li.pure-menu-item {
+			padding-left: 0.5em;
+		}
+
+		.pure-menu-list .pure-menu-list .pure-menu-list {
+			font-size: 0.75em;
+		}
+
+		.pure-menu-list .pure-menu-list .pure-menu-list > li.pure-menu-item {
+			padding-left: 0.5em;
+		}
+
+
+		#main {
+			padding: 2% 2% 2% 8%;
+			color: rgb(64, 64, 64);
+		}
+
+		/* styling the regex forms */
+		.re-match {
+			font-weight: bold;
+			background-color: rgba(255, 124, 124, 0.5);
+		}
+		.regex-input {
+			font-family: "Courier New", Courier, monospace;
+			color: rgb(32, 32, 32);
+			background-color: rgba(192, 192, 192, 0.666);
+			display: table;
+			padding: 0.25em 0.5em;
+			margin-left: 11em;
+		}
+		.regex {
+			font-family: "Courier New", Courier, monospace;
+			color: rgb(32, 32, 32);
+			font-weight: bold;
+			background-color: rgba(192, 192, 192, 0.666);
+			border: 0;
+			padding: 0.25em 0.5em;
+		}
+		.pure-form-aligned .pure-control-group label.pure-checkbox {
+			width: auto;
+		}
+
+		code {
+			color: rgb(32, 32, 32);
+			background-color: rgba(192, 192, 192, 0.666);
+			padding: 0.1em 0.25em;
+			font-size: 0.8em;
+			border: 1px solid silver;
+			border-radius: 0.2em;
+		}
+		code.shell-pattern {
+			background:rgb(42,42,42);
+			color:white;
+			padding:0.1em 0.25em;
+			font-size:0.8em
+		}
+
+		.attention {
+			border-left: 0.5em solid rgba(255, 32, 32, 0.75);
+			margin-left: 0.25em;
+			padding-left: 0.5em;
+		}
+	</style>
+</head>
+<body >
+	<!-- layout -->
+	<div id="layout">
+		<a href="#menu" id="menuLink" class="menu-link">
+			<!-- Hamburger icon -->
+			<span></span>
+		</a>
+
+		<!-- menu -->
+		<div id="menu">
+			<div class="pure-menu">
+				<a class="pure-menu-heading" href="#">Regex Primer</a>
+
+				<ul class="pure-menu-list" id="insert-toc-here">
+					<li class="pure-menu-item"><a href="#jump-regex-intro" class="pure-menu-link">Regex Intro</a></li>
+					<li class="pure-menu-item"><a href="#jump-simple-patterns" class="pure-menu-link">Simple Patterns</a></li>
+					<li class="pure-menu-item"><a href="#jump-classes" class="pure-menu-link">Character Classes</a></li>
+					<li class="pure-menu-item"><a href="#jump-quantifiers" class="pure-menu-link">Quantifiers</a></li>
+
+					<li class="pure-menu-item"><a href="#jump-excercises-a" class="pure-menu-link">Excercises A</a></li>
+
+					<li class="pure-menu-item"><a href="#jump-anchors" class="pure-menu-link">Anchors</a></li>
+
+					<li class="pure-menu-item"><a href="#jump-excercises-b" class="pure-menu-link">Excercises B</a></li>
+
+				</ul>
+			</div>
+		</div>
+		<!-- /menu -->
+
+		<!-- content -->
+		<div id="main" class="pure-g">
+		<div class="pure-u-2-3 pure-u-xl-1-2 pure-u-lg-2-3 pure-u-md-1-1 pure-u-sm-1-1">
+			<h1>Regex Primer</h1>
+
+			<p>this is a primer for regex (=regular expressions) and their testing<br/>
+				this is not a complete course or something, just my basic notes on regexes, so i can just work through the main points - if i have to explain stuff to someone<br />
+				use at own risk! </p>
+
+			
+
+			<h2 id="jump-regex-intro">Regex Intro</h2>
+
+				<p>regular expressione or regex for short are a way to define search patterns for searching and replacing texts</p>
+
+				<p>regex is some kind of a language on its own and has - unfortunately - several dialects that are somewhat alike but not really compatible</p>
+
+				<p>most development editors or IDEs provide a way to work with regexes and a lot of command line tools do it too, plus all programming languages
+					i know support it in some dialect ... <br/>
+					tools: <a target="_blank" href="https://www.gnu.org/software/grep/manual/">grep</a>, <a target="_blank" href="https://www.gnu.org/software/sed/manual/">sed</a>, 
+						<a target="_blank" href="https://www.gnu.org/software/gawk/manual/">awk</a>, ...<br/>
+					editors/IDEs: <a target="_blank" href="http://www.sublimetext.com/">sublime</a>, <a target="_blank" href="https://netbeans.org/">Netbeans</a>,
+					<a target="_blank" href="https://eclipse.org/">Eclipse</a>, <a target="_blank" href="http://www.vim.org/docs.php">vi</a>, ...<br/>
+					languages: perl, javascript, php, ...
+				</p>
+
+				<p class="attention">A regex is used to match lines, so this is why in lots of programms the regex never matches an end of line.
+					Some editors though do not stick to that rule. Languages like e.g. Perl do have regex switches, that can be used to make a pattern match multiline
+					(otherwise the comparison would be stopped at <code>\n</code>).</p>
+
+				<p>best to stick to one tool first and get to know ist quirks and specialities, you can later easily adapt to another dialect for another tool</p>
+
+			
+			
+			<h3>Before we start</h3>
+
+				<p>regexes are a search (and replace) language or - as it is often called - a pattern matching language</p>
+
+				<p class="attention">
+					regexes are character based, that means all parts of a search pattern are referencing a space where one character can be placed.
+					there are <a href="#jump-quantifiers">quantifiers</a> and <a href="#jump-anchors">anchors</a> that show how often something can be repeated, or where
+					something is, but basically your building blocks of a pattern describe, what is in the place of a single character.
+				</p>
+
+				<p>each example will have a <strong>regex</strong> and an input part (often with several lines)
+				lines will be searched seperately as it is with the famous grep command line tool, so we will consider which line will be found or what will be replaced there</p>
+
+				<p>please remember, that the main character to mask or mark something in the regex is the <code>\</code> so we will see a lot of those!<br />
+					<strong>plus</strong> some languages (perl, javascript, php often too) do have the habit of marking beginning and end of regexes with the <code>/</code><br/>
+					this plus all of the other special characters and stuff are the reasons, why regex is often considered to be <strong>write only</strong> code ("leaning toothpick syndrome"), so please, document, what your regex means!<br/>
+					all too often i cannot see what a regex means that  i wrote after some days!</p> 
+
+
+			<h2 id="jump-simple-patterns">Simple Patterns</h2>
+
+				<p>if you want to find any line, that contains an <strong>x</strong> you can just search it like this <code>x</code></p>
+
+				<p>same with words, you search vor <strong>joe</strong>, the search term is <code>joe</code> and this will find:</p>
+
+				<p>each line that contains the three letters <code>j</code> <code>o</code> and <code>e</code> one after the other<br />
+					this seems simple, but understand: a regex consists mainly of symbols for one character
+				</p>
+
+				<p>regexes always search case sensitive, normally there is a modifier to make the search case insensitive</p>
+
+				<p>regexes (in most programming languages i know) normally only search for the ocurrence of a pattern (the first ocurrance), if you want to <em>search</em>
+					for all ocurrences you have to provide a modifier to do that (most editors do not behave like that)<br/>
+					this modifier often is named <code>g</code> for <strong>global</strong> search, which means <strong>global</strong>
+					(as in everywhere) on the <strong>same line</strong>
+				</p>
+
+				<p>each section or exercise will have a part like the one below, where you can test the input against some given data<br/>
+					every time you click on the <button class="pure-button">apply</button> the text that is matched by the given regex is marked</p>
+
+			<form action="#" class="pure-form pure-form-aligned regex-test-form">
+				<fieldset>
+					<legend>testing simple patterns</legend>
+					<div class="pure-control-group">
+						<label for="regex-01">Regex</label>
+						<input class="regex" type="text" value="HT" id="regex-01" />
+						
+					</div>
+					<div class="pure-control-group">
+						<label for="regex-01">Modifiers</label>
+		
+						<label for="mod-g-1" class="pure-checkbox">
+							<input type="checkbox" id="mod-g-1" value="g" />
+							global search
+						</label>
+						<label for="mod-i-1" class="pure-checkbox">
+							<input type="checkbox" id="mod-i-1" value="i" />
+							ignore case
+						</label>
+					</div>
+					
+					<div class="pure-control-group">
+						<label></label>
+						<button class="pure-button regex-test" data-inputid="#input-01" data-regexid="#regex-01" data-modifierids="#mod-g-1|#mod-i-1">apply</button>
+					</div>
+
+					<div class="pure-control-group">
+						<label>Test Input</label>
+						<pre id="input-01" class="regex-input">When HTML is used to create interactive sites, care needs to
+be taken to avoid introducing vulnerabilities through which attackers can compromise the
+integrity of the site itself or of the site's users.
+A comprehensive study of this matter is beyond the scope of this document, and authors
+are strongly encouraged to study the matter in more detail. However, this section attempts
+to provide a quick introduction to some common pitfalls in HTML application development.
+The security model of the Web is based on the concept of "origins", and correspondingly
+many of the potential attacks on the Web involve cross-origin actions.</pre>
+					</div>
+				</fieldset>
+			</form>
+
+
+
+			<h2 id="jump-classes">Character Classes</h2>
+
+				<p>we cannot only search for fixed strings/literals but we can create a bit complexer patterns with classes</p>
+
+				<p>a class represents one single character out of a group (or you can think of as chaining seperate characters with <strong>or</strong>, that can occur
+					in a single space)</p>
+
+				<p class="attention">
+					a class is like this <code>[aeiou]</code>, the square brackets mark the class, everything in between is what will be searched for, here it is 
+					all vocals.<br/>
+					this means the class above searches for one character out of <code>a</code> or <code>e</code> or <code>i</code> <br/>
+					classes can be negated, so anything but an <strong>a</strong> could be constructed like so <code>[^a]</code> in some dialects also <code>[!a]</code><br/>
+					class contents can be written like this: <code>[01234567]</code> which would match a single character that is a numbers between <strong>0</strong> and
+					<strong>9</strong> or it could be shortened like that <code>[0-7]</code>
+				</p>
+
+
+				<h3>Edge Cases</h3>
+
+				<p>and here comes the question, how can i put the simple dash - into a group, and not as the "range" opreator of the class?
+				simple just use it as first or last character in the class definition or escape it with the backslash.
+				so the class that would match one of these single characters a b c d or the - could be written as <code>[a-d-]</code> <code>[-a-d]</code>
+				<code>[a-c\-d]</code></p>
+
+				<p>if you want to search for e.g. a square bracket, you'll have to use <code>\[</code> or <code>\]</code> respectively inside the brackets</p>
+
+				<p>the most common and variable class definiton is described with square brackets e.g. a single <code>d</code> <strong>or</strong> a single <code>t</code> could
+					be constructed like so <code>pre[dt]</code><br/>
+					so this regex means:<br/>
+					a <code>p</code> followed by a <code>r</code> followed by a <code>e</code> then either a <code>d</code> or a <code>t</code>
+
+				<h3>Trial</h3>
+
+			<form action="#" class="pure-form pure-form-aligned regex-test-form">
+				<fieldset>
+					<legend>testing simple patterns</legend>
+					<div class="pure-control-group">
+						<label for="regex-02">Regex</label>
+						<input class="regex" type="text" value="pre[dt]" id="regex-02" />
+						
+					</div>
+					<div class="pure-control-group">
+						<label for="">Modifiers</label>
+		
+						<label for="mod-g-2" class="pure-checkbox">
+							<input type="checkbox" id="mod-g-2" value="g" />
+							global search
+						</label>
+						<label for="mod-i-2" class="pure-checkbox">
+							<input type="checkbox" id="mod-i-2" value="i" />
+							ignore case
+						</label>
+					</div>
+					
+					<div class="pure-control-group">
+						<label></label>
+						<button class="pure-button regex-test" data-inputid="#input-02" data-regexid="#regex-02" data-modifierids="#mod-g-2|#mod-i-2">apply</button>
+					</div>
+
+					<div class="pure-control-group">
+						<label>Test Input</label>
+						<pre id="input-02" class="regex-input">Bataille's analysis of predialectic objectivism holds
+that culture is used in the service of archaic, sexist perceptions
+of art. A number of constructions concerning capitalist objectivism
+may be found. However, primary theme of von Ludwig's model
+of pretextual capitalist theory is bridge between society and class.
+If capitalist objectivism holds, we have to choose between predialectic
+objectivism and Lacanist obscurity.</pre>
+					</div>
+				</fieldset>
+			</form>
+
+
+
+			<h3>predefined classes</h3>
+
+			<p>this depends on the programm providing the regex, but most editors etc. provide some predefined classes for</p>
+
+			<dl>
+				<dt><code>.</code></dt>
+				<dd>any character at all doesnt matter what: <code>.</code> very important</dd>
+				
+				<dt><code>\d</code></dt>
+				<dd>Numbers/Decimals: <code>[0123456789]</code> or shorter <code>[0-9]</code> or predefined <code>\d</code></dd>
+				
+				<dt><code>\D</code></dt>
+				<dd>Not a number: <code>[^0-9]</code> or predefined <code>\D</code></dd>
+				
+				<dt><code>\w</code></dt>
+				<dd>Word characters: <code>[A-Za-z0-9_]</code> would be <code>\w</code></dd>
+				
+				<dt><code>\W</code></dt>
+				<dd>Not a word character: <code>[^A-Za-z0-9_]</code> would be <code>\W</code></dd>
+				
+				<dt><code>\s</code></dt>
+				<dd>Whitespace: <code>[ \t\v\r\n\f]</code> would be <code>\s</code> (\v being a vertical tab, never encountered one, but it should be whitespace according to documentation ;) \f is formfeed ... ditto)</dd>
+				
+				<dt><code>\S</code></dt>
+				<dd>Not a whitespace: <code>[^ \t\v\r\n]</code> would be <code>\S</code></dd>
+			</dl>
+
+
+
+			<h2 id="jump-quantifiers">quantifiers</h2>
+
+			<p>a quantifier is yet another special character in the regex zoo and tells us how often a character (or class) may occur.</p>
+
+			<p>the most variable quantifier is written in curly braces so three times the letter p could be written as p{3}</p>
+
+			<p>to make things more interesting, we can also write two numbers in curly braces to specify an at least to a max number of ocurrences</p>
+
+			<p>e.g. <code>m{1,2}</code> is one or two m so it would match</p>
+
+			<p>or <code>a{0,1}</code> is an aor no a</p>
+
+			<p>or <code>a{1,}</code> means at least 1 a up to as many as you like so it would match Kanaan or even aaaaaaaaaaaaaaaaaaahhh!!!</p>
+
+			<h3>predefined quantifiers</h3>
+
+			<dl>
+				<dt><code>?</code></dt>
+				<dd>0 to 1 characters would be {0,1} and can be written as ?</dd>
+				
+				<dt><code>*</code></dt>
+				<dd>0 to as many as possible characters would be <code>{0,}</code> and can be written as <code>*</code><br/>
+				<strong>Attention!!!</strong> the <code>*</code> in RegEx is quite close to the <code class="shell-pattern">*</code> in Shell filename matching, but has to be interpreted slightly differently. dont mix
+					these things<br/>
+					the shell * can be used as 0-max characters, the same thing as regex would be <code>.*</code> in RegEx
+						the RegEx * cannot be used standalone!
+				</dd>
+				
+				<dt><code>+</code></dt>
+				<dd>1 to as many as possible characters would be {1,} and can be written as +</dd>
+			</dl>
+			
+			<h3>Greediness</h3>
+
+			<p>Attention!
+			<p>RegEx quantifiers are per se greedy that means they always match as many characters as possible!
+
+			<p>given the input string
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati saepe laboriosam expedita blandi
+and the pattern /m.*/ the pattern would match all of that
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati saepe laboriosam expedita blandi
+this is especially important for any search and replace!
+
+
+
+
+
+		</div>
+		</div>
+		<!-- /content -->
+
+	</div>
+	<!-- /layout -->
+
+	<script src="./js/menu.js"></script>
+	<script src="./js/regex-tester.js"></script>
+	<script src="./js/menu-entries.js"></script>
+
+</body>
+</html>
