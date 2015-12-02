@@ -4,101 +4,9 @@
 	<meta charset="UTF-8">
 	<title>Regular Expressions Primer</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="./css/pure-min.css">
 	<link rel="stylesheet" href="./css/side-menu.css">
-	<style>
-		/* styling some basic html */
-		h1, h2, h3, h4 {
-			margin-bottom: 0.5em;
-		}
-
-
-		/* overwriting a bit of pure defaults (i like green better than blue ;) */
-		#main a, #main a:visited, #main a:active, #main a:link {
-			text-decoration: none;
-			color: darkgreen;
-			font-style: italic;
-			font-weight: bold;
-			padding: 0 0.15em;
-		} 
-		#main a:hover {
-			font-style: normal;
-			background-color: darkgreen;
-			color: white;	
-		}
-		
-		#menu .pure-menu-selected, #menu .pure-menu-heading {
-			background-color: darkgreen;
-		}
-
-		.pure-menu-list .pure-menu-list {
-			font-size: 0.85em;
-		}
-
-		.pure-menu-list .pure-menu-list > li.pure-menu-item {
-			padding-left: 0.5em;
-		}
-
-		.pure-menu-list .pure-menu-list .pure-menu-list {
-			font-size: 0.75em;
-		}
-
-		.pure-menu-list .pure-menu-list .pure-menu-list > li.pure-menu-item {
-			padding-left: 0.5em;
-		}
-
-
-		#main {
-			padding: 2% 2% 2% 8%;
-			color: rgb(64, 64, 64);
-		}
-
-		/* styling the regex forms */
-		.re-match {
-			font-weight: bold;
-			background-color: rgba(255, 124, 124, 0.5);
-		}
-		.regex-input {
-			font-family: "Courier New", Courier, monospace;
-			color: rgb(32, 32, 32);
-			background-color: rgba(192, 192, 192, 0.666);
-			display: table;
-			padding: 0.25em 0.5em;
-			margin-left: 11em;
-		}
-		.regex {
-			font-family: "Courier New", Courier, monospace;
-			color: rgb(32, 32, 32);
-			font-weight: bold;
-			background-color: rgba(192, 192, 192, 0.666);
-			border: 0;
-			padding: 0.25em 0.5em;
-		}
-		.pure-form-aligned .pure-control-group label.pure-checkbox {
-			width: auto;
-		}
-
-		code {
-			color: rgb(32, 32, 32);
-			background-color: rgba(192, 192, 192, 0.666);
-			padding: 0.1em 0.25em;
-			font-size: 0.8em;
-			border: 1px solid silver;
-			border-radius: 0.2em;
-		}
-		code.shell-pattern {
-			background:rgb(42,42,42);
-			color:white;
-			padding:0.1em 0.25em;
-			font-size:0.8em
-		}
-
-		.attention {
-			border-left: 0.5em solid rgba(255, 32, 32, 0.75);
-			margin-left: 0.25em;
-			padding-left: 0.5em;
-		}
-	</style>
+	<link rel="stylesheet" href="./css/adaptions.css">
 </head>
 <body >
 	<!-- layout -->
@@ -118,13 +26,7 @@
 					<li class="pure-menu-item"><a href="#jump-simple-patterns" class="pure-menu-link">Simple Patterns</a></li>
 					<li class="pure-menu-item"><a href="#jump-classes" class="pure-menu-link">Character Classes</a></li>
 					<li class="pure-menu-item"><a href="#jump-quantifiers" class="pure-menu-link">Quantifiers</a></li>
-
-					<li class="pure-menu-item"><a href="#jump-excercises-a" class="pure-menu-link">Excercises A</a></li>
-
 					<li class="pure-menu-item"><a href="#jump-anchors" class="pure-menu-link">Anchors</a></li>
-
-					<li class="pure-menu-item"><a href="#jump-excercises-b" class="pure-menu-link">Excercises B</a></li>
-
 				</ul>
 			</div>
 		</div>
