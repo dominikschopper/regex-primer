@@ -263,36 +263,45 @@ objectivism and Lacanist obscurity.</pre>
 
 			<p>or <code>a{0,1}</code> is an aor no a</p>
 
-			<p>or <code>a{1,}</code> means at least 1 a up to as many as you like so it would match Kanaan or even aaaaaaaaaaaaaaaaaaahhh!!!</p>
+			<p>or <code>a{1,}</code> means at least 1 a up to as many as you like so it would match <code>K<span class="re-match">a</span>n<span class="re-match">aa</span>n</code> or even <code><span class="re-match">aaaaaaaaaaaaaaaaaaa</span>hhh!!!</code></p>
 
 			<h3>predefined quantifiers</h3>
 
 			<dl>
 				<dt><code>?</code></dt>
-				<dd>0 to 1 characters would be {0,1} and can be written as ?</dd>
+				<dd>
+					0 to 1 characters would be <code>{0,1}</code> and can be written as <code>?</code><br />
+					example <code>https?://</code> would match the following urls
+					<pre class="regex-input"><span class="re-match">http://</span>www.wotever.com
+<span class="re-match">https://</span>domain.com/ssl
+					</pre>
+				</dd>
 				
 				<dt><code>*</code></dt>
 				<dd>0 to as many as possible characters would be <code>{0,}</code> and can be written as <code>*</code><br/>
 				<strong>Attention!!!</strong> the <code>*</code> in RegEx is quite close to the <code class="shell-pattern">*</code> in Shell filename matching, but has to be interpreted slightly differently. dont mix
 					these things<br/>
-					the shell * can be used as 0-max characters, the same thing as regex would be <code>.*</code> in RegEx
-						the RegEx * cannot be used standalone!
+					the shell <code class="shell-pattern">*</code> can be used as 0-max characters, the same thing as regex would be <code>.*</code> in RegEx
+						the RegEx <code>*</code> cannot be used standalone!
 				</dd>
 				
 				<dt><code>+</code></dt>
-				<dd>1 to as many as possible characters would be {1,} and can be written as +</dd>
+				<dd>
+					1 to as many as possible characters would be <code>{1,}</code> and can be written as <code>+</code><br />
+					so the example above <code>a{1,}</code> could be written as <code>a+</code>
+				</dd>
 			</dl>
 			
 			<h3>Greediness</h3>
 
-			<p>Attention!
-			<p>RegEx quantifiers are per se greedy that means they always match as many characters as possible!
+			<p>Attention!</p>
+			<p>RegEx quantifiers are per se greedy that means they always match as many characters as possible!</p>
 
 			<p>given the input string
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati saepe laboriosam expedita blandi
 and the pattern /m.*/ the pattern would match all of that
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati saepe laboriosam expedita blandi
-this is especially important for any search and replace!
+this is especially important for any search and replace!</p>
 
 
 

@@ -13,7 +13,7 @@
 			padding: 0 0.15em;
 		} 
 		#main a:hover {
-			font-style: normal;
+			font-weight: bold;
 			background-color: darkgreen;
 			color: white;	
 		}
