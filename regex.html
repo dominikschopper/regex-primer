@@ -174,10 +174,11 @@ many of the potential attacks on the Web involve cross-origin actions.</pre>
 
 				<p>if you want to search for e.g. a square bracket, you'll have to use <code>\[</code> or <code>\]</code> respectively inside the brackets</p>
 
-				<p>the most common and variable class definiton is described with square brackets e.g. a single <code>d</code> <strong>or</strong> a single <code>t</code> could
-					be constructed like so <code>pre[dt]</code><br/>
+				<p>the most common and variable class definiton is described with square brackets e.g. a single <code>d</code> <strong>or</strong> a single <code>t</code> could be constructed like so <code>pre[dt]</code></p>
+				<p>
 					so this regex means:<br/>
 					a <code>p</code> followed by a <code>r</code> followed by a <code>e</code> then either a <code>d</code> or a <code>t</code>
+				</p>
 
 				<h3>Trial</h3>
 
@@ -251,7 +252,7 @@ objectivism and Lacanist obscurity.</pre>
 
 
 
-			<h2 id="jump-quantifiers">quantifiers</h2>
+			<h2 id="jump-quantifiers">Quantifiers</h2>
 
 			<p>a quantifier is yet another special character in the regex zoo and tells us how often a character (or class) may occur.</p>
 
@@ -273,16 +274,23 @@ objectivism and Lacanist obscurity.</pre>
 					0 to 1 characters would be <code>{0,1}</code> and can be written as <code>?</code><br />
 					example <code>https?://</code> would match the following urls
 					<pre class="regex-input"><span class="re-match">http://</span>www.wotever.com
-<span class="re-match">https://</span>domain.com/ssl
-					</pre>
+<span class="re-match">https://</span>domain.com/ssl</pre>
 				</dd>
 				
 				<dt><code>*</code></dt>
-				<dd>0 to as many as possible characters would be <code>{0,}</code> and can be written as <code>*</code><br/>
-				<strong>Attention!!!</strong> the <code>*</code> in RegEx is quite close to the <code class="shell-pattern">*</code> in Shell filename matching, but has to be interpreted slightly differently. dont mix
-					these things<br/>
-					the shell <code class="shell-pattern">*</code> can be used as 0-max characters, the same thing as regex would be <code>.*</code> in RegEx
-						the RegEx <code>*</code> cannot be used standalone!
+				<dd>0 to as many as possible characters would be <code>{0,}</code> and can be written as <code>*</code><br />
+										example <code>"[^"]*"</code> would globally match the following parts of a csv
+<pre class="regex-input">
+<span class="re-match">""</span>;<span class="re-match">"ID"</span>;<span class="re-match">"fname"</span>;<span class="re-match">"lname"</span><br />
+<span class="re-match">"0"</span>;<span class="re-match">"Thomas"</span>;<span class="re-match">"Greene"</span><br />
+<span class="re-match">"1"</span>;<span class="re-match">""</span>;<span class="re-match">"Miller"</span><br />
+<span class="re-match">"2"</span>;<span class="re-match">"Kim"</span>;<span class="re-match">""</span></pre>
+					<p class="attention">
+						The <code>*</code> in RegEx is quite close to the <code class="shell-pattern">*</code> in Shell filename matching,
+						but has to be interpreted slightly differently. dont mix these things<br/>
+						the shell <code class="shell-pattern">*</code> can be used as 0-max characters, the same thing as regex would be
+						<code>.*</code> in a regex, The regex <code>*</code> cannot be used standalone!
+					</p>
 				</dd>
 				
 				<dt><code>+</code></dt>
