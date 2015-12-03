@@ -3,6 +3,10 @@
 			margin-bottom: 0.5em;
 		}
 
+		dt {
+			border-top: 1px solid rgb(192, 192, 192);
+    		font-weight: bold;
+		}
 
 		/* overwriting a bit of pure defaults (i like green better than blue ;) */
 		#main a, #main a:visited, #main a:active, #main a:link {
