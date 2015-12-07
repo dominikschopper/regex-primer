@@ -59,8 +59,12 @@
 			background-color: rgba(192, 192, 192, 0.666);
 			display: table;
 			padding: 0.25em 0.5em;
+		}
+
+		.pure-form-aligned .regex-input {
 			margin-left: 11em;
 		}
+
 		.regex {
 			font-family: "Courier New", Courier, monospace;
 			color: rgb(32, 32, 32);

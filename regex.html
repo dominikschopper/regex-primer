@@ -303,18 +303,154 @@ objectivism and Lacanist obscurity.</pre>
 			
 			<h3>Greediness</h3>
 
-			<p>Attention!</p>
-			<p>RegEx quantifiers are per se greedy that means they always match as many characters as possible!</p>
+			<p class="attention">
+				regex quantifiers are per se greedy that means they always match as many characters as possible!<br />
+				given the input string below and the pattern <code>m.*</code> this pattern would match all of the area below
+			</p>
 
-			<p>given the input string
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati saepe laboriosam expedita blandi
-and the pattern /m.*/ the pattern would match all of that
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati saepe laboriosam expedita blandi
-this is especially important for any search and replace!</p>
+			<pre class="regex-input">Lore<span class="re-match">m ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati saepe laboriosam expedita blandi</span></pre>
 
 
+		<h2>Excercise A</h2>
+
+		<ol>
+			<li>
+				Try to match all words (<code>0-9a-zA-Z_</code>) in this csv example
+				
+				<form action="#" class="pure-form pure-form-aligned regex-test-form">
+					<fieldset>
+						<legend>match fields w.out quotes</legend>
+						<div class="pure-control-group">
+							<label for="exc-a1-regex">Regex</label>
+							<input class="regex" type="text" value="" id="exc-a1-regex" />
+							
+						</div>
+						<div class="pure-control-group">
+							<label for="">Modifiers</label>
+			
+							<label for="mod-exc-a1-g" class="pure-checkbox">
+								<input type="checkbox" id="mod-exc-a1-g" value="g" />
+								global search
+							</label>
+							<label for="mod-exc-a1-i" class="pure-checkbox">
+								<input type="checkbox" id="mod-exc-a1-i" value="i" />
+								ignore case
+							</label>
+						</div>
+						
+						<div class="pure-control-group">
+							<label></label>
+							<button class="pure-button regex-test" data-inputid="#exc-a1-input" data-regexid="#exc-a1-regex" data-modifierids="#mod-exc-a1-g|#mod-exc-a1-i">apply</button>
+						</div>
+
+						<div class="pure-control-group">
+							<label>Test Input</label>
+							<pre id="exc-a1-input" class="regex-input">"#";"name";"hash";"no"
+121;"test a";"aed14f94de38f39427774d4380587e59";1332.23
+1451;"test b";"a26c2a4fd4877d0802a3d1be4333fc37";992.4
+322;"test c";"7e421266f9f40f9443f96174436a5032";753
+645;"another test";"c2632a4fd48f7d08a2a3d1be9873fc37";66.4</pre>
+						</div>
+					</fieldset>
+				</form>
+
+			</li>
+
+			<li>
+				Try to match all numbers that contain a "7" anywhere (even if the number is only a "7"), but dont match anything else
+				(also in floats with comma or dot only match the integers before and after only if there is a 7 in there somewhere)
+
+								<form action="#" class="pure-form pure-form-aligned regex-test-form">
+					<fieldset>
+						<legend>match fields w.out quotes</legend>
+						<div class="pure-control-group">
+							<label for="exc-a2-regex">Regex</label>
+							<input class="regex" type="text" value="7" id="exc-a2-regex" />
+							
+						</div>
+						<div class="pure-control-group">
+							<label for="">Modifiers</label>
+			
+							<label for="mod-exc-a2-g" class="pure-checkbox">
+								<input type="checkbox" id="mod-exc-a2-g" value="g" />
+								global search
+							</label>
+							<label for="mod-exc-a2-i" class="pure-checkbox">
+								<input type="checkbox" id="mod-exc-a2-i" value="i" />
+								ignore case
+							</label>
+						</div>
+						
+						<div class="pure-control-group">
+							<label></label>
+							<button class="pure-button regex-test" data-inputid="#exc-a2-input" data-regexid="#exc-a2-regex" data-modifierids="#mod-exc-a2-g|#mod-exc-a2-i">apply</button>
+						</div>
+
+						<div class="pure-control-group">
+							<label>Test Input</label>
+							<pre id="exc-a2-input" class="regex-input">712asdw 2134-2234
+123,456e17
+this was no 117 that we encountered 7times here
+3345335213485
+35437
+123.456
+44,550,660,771.123
+-7777777-</pre>
+						</div>
+					</fieldset>
+				</form>
+
+			</li>
 
 
+			<li>
+				Try to match all integers and floats like <code>123.345</code> or <code>.123123</code> or <code>32423</code><br />
+				can you match only if there is only a single integer|float on the line? why not?
+
+				<form action="#" class="pure-form pure-form-aligned regex-test-form">
+					<fieldset>
+						<legend>match int and float</legend>
+						<div class="pure-control-group">
+							<label for="exc-a3-regex">Regex</label>
+							<input class="regex" type="text" value="\d" id="exc-a3-regex" />
+							
+						</div>
+						<div class="pure-control-group">
+							<label for="">Modifiers</label>
+			
+							<label for="mod-exc-a3-g" class="pure-checkbox">
+								<input type="checkbox" id="mod-exc-a3-g" value="g" />
+								global search
+							</label>
+							<label for="mod-exc-a3-i" class="pure-checkbox">
+								<input type="checkbox" id="mod-exc-a3-i" value="i" />
+								ignore case
+							</label>
+						</div>
+						
+						<div class="pure-control-group">
+							<label></label>
+							<button class="pure-button regex-test" data-inputid="#exc-a3-input" data-regexid="#exc-a3-regex" data-modifierids="#mod-exc-a3-g|#mod-exc-a3-i">apply</button>
+						</div>
+
+						<div class="pure-control-group">
+							<label>Test Input</label>
+							<pre id="exc-a3-input" class="regex-input">123
+22.7123312
+.3345
+1.2323
+382
+hey4747
+77.32 what?
+0.32445
+</pre>
+						</div>
+					</fieldset>
+				</form>
+
+			</li>
+
+		</ol>
 
 		</div>
 		</div>

@@ -59,7 +59,9 @@ var testReOnCLick = (function () {
 		// get the input and remove any html tags in there
 		var input = inputElement.innerHTML.replace(/<[^>]*>/g, '');
 
+		input = input.replace(/\&nbsp;/g, '');
 		var lines = input.split(/\r?\n/);
+
 		var newLines = [];
 
 		lines.forEach(function (l, i) {
@@ -67,7 +69,7 @@ var testReOnCLick = (function () {
 		});
 
 		// now we put the replaced value back in
-		inputElement.innerHTML = newLines.join('\n');
+		inputElement.innerHTML = newLines.join('&nbsp;\n');
 
 	};
 }());
