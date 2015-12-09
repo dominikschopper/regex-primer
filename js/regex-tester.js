@@ -37,6 +37,33 @@ var testReOnCLick = (function () {
 		return '';
 	}
 
+	var el2value = new WeakMap();
+
+	/**
+	 * returns the content of an HTMLElement and will always return the content it was first given
+	 * uses getELementContent
+	 * @see getELementContent
+	 */
+	function getOriginalContent(el) {
+		if (!el2value.has(el)) {
+			el2value.set(el, getElementContent(el));
+		}
+		return el2value.get(el);
+	}
+
+	/**
+	 * returns the content of an HTMLElement, but favouring ".value" (like for textareas) over innerHTML
+	 */
+	function getElementContent(el) {
+		if (!el) {
+			return '';
+		}
+		if (el.value) {
+			return el.value;
+		}
+		return el.innerText;
+	}
+
 	return function regexTest(ev) {
 		
 		// dont do the clicks default
@@ -45,9 +72,6 @@ var testReOnCLick = (function () {
 		// do we need to set some modifiers? like "g" "i"
 		var mods = '';
 		var modifierids = this.dataset.modifierids ?  this.dataset.modifierids.split('|') : [];
-
-		// we need to clean up our markers from before
-		var replacer = this.dataset.replacer ? new RegExp(this.dataset.replacer, 'g') : /<[^>]*>/g;
 
 		// what should we insert? $& contains the complete match!
 		var insertAtMatch = this.dataset.insertinstead ? document.querySelector(this.dataset.insertinstead).value : '<span class="re-match">$&</span>';
@@ -59,16 +83,13 @@ var testReOnCLick = (function () {
 		// get the regex out of the input field denoted in data-regexid
 		var re = new RegExp(document.querySelector(this.dataset.regexid).value, mods);
 
-		// get the input element out of element denoted in data-inputid
+		// get the ELement that contains the input to test against
 		var inputElement = document.querySelector(this.dataset.inputid);
 
 		// since i sometimes need textareas too, i need to get the input with .value instead of getting the innerHTML
-		var inputValue = inputElement.value ? inputElement.value : inputElement.innerHTML;
+		var inputValue = getOriginalContent(inputElement);
 
-		// get the input and remove any previous stuff tags in there
-		var input = inputValue.replace(replacer, '');
-
-		input = input.replace(/\&nbsp;/g, '');
+		input = inputValue.replace(/\&nbsp;/g, '');
 		var lines = input.split(/\r?\n/);
 
 		var newLines = [];

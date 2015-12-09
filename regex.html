@@ -304,7 +304,7 @@ objectivism and Lacanist obscurity.</pre>
 			<h3>Greediness</h3>
 
 			<p class="attention">
-				regex quantifiers are per se greedy that means they always match as many characters as possible!<br />
+				regex quantifiers are per se greedy, that means they always match <strong>as many characters as possible</strong>!<br />
 				given the input string below and the pattern <code>m.*</code> this pattern would match all of the area below
 			</p>
 
@@ -474,17 +474,16 @@ hey4747
 			<li> 
 				<ol type="a">
 					<li>
-						match all tags that have exactly a single character tag name
-						(like <code><span class="re-match">&lt;a href="#"&gt;</span>...<span class="re-match">&lt;/a&gt;</span></code> tags or <code><span class="re-match">&lt;b&gt;</span>...<span class="re-match">&lt;/b&gt;</span></code> tags) but match<br />
-						<strong>opening and closing</strong> tags!<br />
-						Also match upper and lower case tags!!<br />
-						that means match the tags with their brackets, match opening and closing tags, match tags with their attributes!!<br/>
+						match all tags (like <code><span class="re-match">&lt;a href="#"&gt;</span>...<span class="re-match">&lt;/a&gt;</span></code> tags
+						or <code><span class="re-match">&lt;b&gt;</span>...<span class="re-match">&lt;/b&gt;</span></code> tags) but match
+						<strong>opening and closing</strong> tags! Also match <strong>upper and lower case tags</strong>!! You should match the tags
+						<strong>with their brackets</strong>, match tags <strong>with their attributes</strong>!!
 					</li>
 					<li>
 						match all tags that have tag names with more than two letters. Match the complete tag, with brackets, attributes and all <code>&lt;xx &gt;</code>
 					</li>
 					<li>
-						match only the content of all <code>href</code> or <code>src</code> attributes
+						match all <code>href="..."</code> and <code>src="..."</code> attributes, why doesnt it work completely?
 					</li>
 				</ol>
 				Tip:
@@ -517,7 +516,7 @@ hey4747
 
 						<div class="pure-control-group">
 							<label>Replace match with</label>
-							<input class="regex" id="exc-a4-insert" type="text" value="**$&**" />
+							<input readonly class="regex" id="exc-a4-insert" type="text" value="**$&**" />
 						</div>
 						
 						<div class="pure-control-group">
@@ -526,7 +525,6 @@ hey4747
 								data-inputid="#exc-a4-input"
 								data-regexid="#exc-a4-regex"
 								data-modifierids="#mod-exc-a4-g|#mod-exc-a4-i"
-								data-replacer="##"
 								data-insertinstead="#exc-a4-insert">apply</button>
 						</div>
 
@@ -541,7 +539,7 @@ numquam ab eius <U class="test">facere maiores</U> mollitia temporibus</blockquo
 <li>repellat totam perspiciatis?</li>
 <li>Earum accusantium</li>
 </ul>
-<img src="./test/wolf.png" alt="not a werewolf" />
+<img data-hrc="test me" src="./test/wolf.png" alt="not a werewolf" />
 <pre>facere veniam. <I>Possimus maiores</I> laudantium vel
 ullam corporis!</pre>
 </textarea>

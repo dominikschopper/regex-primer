@@ -67,11 +67,13 @@
 			display: table;
 			padding: 0.25em 0.5em;
 		}
-		textarea.regex-input {
+		
+		.regex-test-form textarea.regex-input {
 			display: block;
 		    overflow: visible;
 		    width: 80%;
 		    height: 17em;
+		    color: rgb(32, 32, 32);
 		}
 
 		.pure-form-aligned .regex-input {
