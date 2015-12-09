@@ -39,12 +39,18 @@ var testReOnCLick = (function () {
 
 	return function regexTest(ev) {
 		
-		// dont react to a click
+		// dont do the clicks default
 		ev.preventDefault();
 		
 		// do we need to set some modifiers? like "g" "i"
 		var mods = '';
 		var modifierids = this.dataset.modifierids ?  this.dataset.modifierids.split('|') : [];
+
+		// we need to clean up our markers from before
+		var replacer = this.dataset.replacer ? new RegExp(this.dataset.replacer, 'g') : /<[^>]*>/g;
+
+		// what should we insert? $& contains the complete match!
+		var insertAtMatch = this.dataset.insertinstead ? document.querySelector(this.dataset.insertinstead).value : '<span class="re-match">$&</span>';
 
 		for (var i in modifierids) {
 			mods += getModifierFromCheckbox(modifierids[i]);
@@ -56,8 +62,11 @@ var testReOnCLick = (function () {
 		// get the input element out of element denoted in data-inputid
 		var inputElement = document.querySelector(this.dataset.inputid);
 
-		// get the input and remove any html tags in there
-		var input = inputElement.innerHTML.replace(/<[^>]*>/g, '');
+		// since i sometimes need textareas too, i need to get the input with .value instead of getting the innerHTML
+		var inputValue = inputElement.value ? inputElement.value : inputElement.innerHTML;
+
+		// get the input and remove any previous stuff tags in there
+		var input = inputValue.replace(replacer, '');
 
 		input = input.replace(/\&nbsp;/g, '');
 		var lines = input.split(/\r?\n/);
@@ -65,7 +74,7 @@ var testReOnCLick = (function () {
 		var newLines = [];
 
 		lines.forEach(function (l, i) {
-			newLines.push(l.replace(re, '<span class="re-match">$&</span>'));
+			newLines.push(l.replace(re, insertAtMatch));
 		});
 
 		// now we put the replaced value back in

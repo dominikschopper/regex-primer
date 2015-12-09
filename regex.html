@@ -315,14 +315,24 @@ objectivism and Lacanist obscurity.</pre>
 
 		<ol>
 			<li>
-				Try to match all words (<code>0-9a-zA-Z_</code>) in this csv example
+				<ol type="a">
+					<li>
+						Try to match all lower case words (blocks of lower case letters that do not start upper case) in this example
+					</li>
+					<li>
+						match all words with 4 letters
+					</li>
+					<li>
+						match all words with 5 letters or less
+					</li>
+				</ol>
 				
 				<form action="#" class="pure-form pure-form-aligned regex-test-form">
 					<fieldset>
-						<legend>match fields w.out quotes</legend>
+						<legend>match words</legend>
 						<div class="pure-control-group">
 							<label for="exc-a1-regex">Regex</label>
-							<input class="regex" type="text" value="" id="exc-a1-regex" />
+							<input class="regex" type="text" value="a-z" id="exc-a1-regex" />
 							
 						</div>
 						<div class="pure-control-group">
@@ -345,11 +355,16 @@ objectivism and Lacanist obscurity.</pre>
 
 						<div class="pure-control-group">
 							<label>Test Input</label>
-							<pre id="exc-a1-input" class="regex-input">"#";"name";"hash";"no"
-121;"test a";"aed14f94de38f39427774d4380587e59";1332.23
-1451;"test b";"a26c2a4fd4877d0802a3d1be4333fc37";992.4
-322;"test c";"7e421266f9f40f9443f96174436a5032";753
-645;"another test";"c2632a4fd48f7d08a2a3d1be9873fc37";66.4</pre>
+							<pre id="exc-a1-input" class="regex-input">Lorem ipsum Dolor sit amet, consectetur
+adipisicing elit. Excepturi quibusdam VERITATIS saepe
+enim Voluptate quae
+explicabo illum Pariatur, aperiam quos
+magni minus Officia repudiandae Dolorum,
+sequi eaque, maxime ab
+corrupti Cum delectus
+deserunt perspiciatis!
+Tempore maiores Aspernatur
+laboriosam iste ut commodi at aperiam.</pre>
 						</div>
 					</fieldset>
 				</form>
@@ -357,12 +372,19 @@ objectivism and Lacanist obscurity.</pre>
 			</li>
 
 			<li>
-				Try to match all numberblocks completely that contain a "7" anywhere (even if the number is only a "7"), but dont match anything else
-				(also in floats with comma or dot only match the integers before and after and only if there is a 7 in there somewhere)
+				<ol type="a">
+					<li>
+						Try to match all numberblocks completely that contain a "7" anywhere (even if the number is only a "7"), but dont match anything else
+						(also in floats with comma or dot only match the integers before and after and only if there is a 7 in there somewhere)
+					</li>
+					<li>
+						Try to match the first and the last 7 in each line (no matter what is between them)
+					</li>
+				</ol>
 
 								<form action="#" class="pure-form pure-form-aligned regex-test-form">
 					<fieldset>
-						<legend>match fields w.out quotes</legend>
+						<legend>match numbers containing 7</legend>
 						<div class="pure-control-group">
 							<label for="exc-a2-regex">Regex</label>
 							<input class="regex" type="text" value="7" id="exc-a2-regex" />
@@ -388,8 +410,8 @@ objectivism and Lacanist obscurity.</pre>
 
 						<div class="pure-control-group">
 							<label>Test Input</label>
-							<pre id="exc-a2-input" class="regex-input">712asdw 2134-2234
-123,456e17
+							<pre id="exc-a2-input" class="regex-input">712asdw 2134-2274
+123,476e17
 this was no 117 that we encountered 7times here
 3345335213485
 35437
@@ -404,8 +426,8 @@ this was no 117 that we encountered 7times here
 
 
 			<li>
-				Try to match all integers and floats like <code>123.345</code> or <code>.123123</code> or <code>32423</code><br />
-				can you match only if there is only a single integer|float on the line? why not?
+				Try to match all blocks of integers and floats completely e.g. <code>123.345</code> or <code>.123123</code> or <code>32423</code><br />
+				can you match only if there is only a single integer or float on the line? why not?
 
 				<form action="#" class="pure-form pure-form-aligned regex-test-form">
 					<fieldset>
@@ -442,12 +464,90 @@ this was no 117 that we encountered 7times here
 382
 hey4747
 77.32 what?
-0.32445
-</pre>
+0.32445</pre>
 						</div>
 					</fieldset>
 				</form>
 
+			</li>
+
+			<li> 
+				<ol type="a">
+					<li>
+						match all tags that have exactly a single character tag name
+						(like <code><span class="re-match">&lt;a href="#"&gt;</span>...<span class="re-match">&lt;/a&gt;</span></code> tags or <code><span class="re-match">&lt;b&gt;</span>...<span class="re-match">&lt;/b&gt;</span></code> tags) but match<br />
+						<strong>opening and closing</strong> tags!<br />
+						Also match upper and lower case tags!!<br />
+						that means match the tags with their brackets, match opening and closing tags, match tags with their attributes!!<br/>
+					</li>
+					<li>
+						match all tags that have tag names with more than two letters. Match the complete tag, with brackets, attributes and all <code>&lt;xx &gt;</code>
+					</li>
+					<li>
+						match only the content of all <code>href</code> or <code>src</code> attributes
+					</li>
+				</ol>
+				Tip:
+					<ul>
+						<li>start matching easy, like finding the opening tags, without their closing counterpart.</li>
+						<li>then match them with their attributes.</li>
+						<li>Then match the closing parts also.</li>
+					</ul>
+				<p class="attention">Because auf HTML tags within a HTML document, i will surround the match with <code>**</code></p>
+				<form action="#" class="pure-form pure-form-aligned regex-test-form">
+					<fieldset>
+						<legend>match tags</legend>
+						<div class="pure-control-group">
+							<label for="exc-a4-regex">Regex</label>
+							<input class="regex" type="text" value="<" id="exc-a4-regex" />
+							
+						</div>
+						<div class="pure-control-group">
+							<label for="">Modifiers</label>
+			
+							<label for="mod-exc-a4-g" class="pure-checkbox">
+								<input type="checkbox" id="mod-exc-a4-g" value="g" />
+								global search
+							</label>
+							<label for="mod-exc-a4-i" class="pure-checkbox">
+								<input type="checkbox" id="mod-exc-a4-i" value="i" />
+								ignore case
+							</label>
+						</div>
+
+						<div class="pure-control-group">
+							<label>Replace match with</label>
+							<input class="regex" id="exc-a4-insert" type="text" value="**$&**" />
+						</div>
+						
+						<div class="pure-control-group">
+							<label></label>
+							<button class="pure-button regex-test"
+								data-inputid="#exc-a4-input"
+								data-regexid="#exc-a4-regex"
+								data-modifierids="#mod-exc-a4-g|#mod-exc-a4-i"
+								data-replacer="##"
+								data-insertinstead="#exc-a4-insert">apply</button>
+						</div>
+
+						<div class="pure-control-group">
+							<label>Test Input</label>
+							<textarea readonly="readonly" cols="auto" rows="auto" id="exc-a4-input" class="regex-input"><p>Lorem ipsum <em>dolor</em></p>
+sit amet, consectetur
+<h1>adipisicing elit. Possimus</h1>
+<blockquote>et sit <a href="#">aliquam nam</a>
+numquam ab eius <U class="test">facere maiores</U> mollitia temporibus</blockquote>
+<ul>
+<li>repellat totam perspiciatis?</li>
+<li>Earum accusantium</li>
+</ul>
+<img src="./test/wolf.png" alt="not a werewolf" />
+<pre>facere veniam. <I>Possimus maiores</I> laudantium vel
+ullam corporis!</pre>
+</textarea>
+						</div>
+					</fieldset>
+				</form>
 			</li>
 
 		</ol>
