@@ -1,6 +1,23 @@
 		/* styling some basic html */
+		html body {
+			font-size: 16px;
+			font-family: Verdana, Helvetica ,sans-serif;
+		}
 		h1, h2, h3, h4 {
 			margin-bottom: 0.5em;
+		}
+
+		#main h2 {
+			padding: 0.3333em 0.5em 0.3333em 0.25em;
+			margin: 1.25em 0 0.5em 0;
+			background-color: rgb(0, 100, 0);
+			background-color: rgba(0, 100, 0, 0.8);
+			color: white;
+		}
+
+		#main h3 {
+			border-bottom: rgb(0, 100, 0) solid 2px;
+			border-bottom: rgba(0, 100, 0, 0.85) solid 2px;
 		}
 
 		dt {
@@ -23,7 +40,8 @@
 		}
 		
 		#menu .pure-menu-list, #menu .pure-menu-heading {
-			background-color: darkgreen;
+			background-color: rgb(0, 100, 0);
+			background-color: rgba(0, 100, 0, 0.85);
 		}
 
 		.pure-menu-list .pure-menu-list {

@@ -135,14 +135,16 @@
 
 					<div class="pure-control-group">
 						<label>Test Input</label>
-						<pre id="input-01" class="regex-input">When HTML is used to create interactive sites, care needs to
-be taken to avoid introducing vulnerabilities through which attackers can compromise the
-integrity of the site itself or of the site's users.
-A comprehensive study of this matter is beyond the scope of this document, and authors
-are strongly encouraged to study the matter in more detail. However, this section attempts
-to provide a quick introduction to some common pitfalls in HTML application development.
-The security model of the Web is based on the concept of "origins", and correspondingly
-many of the potential attacks on the Web involve cross-origin actions.</pre>
+						<pre id="input-01" class="regex-input">When HTML is used to create interactive sites, care
+needs to be taken to avoid introducing vulnerabilities through which
+attackers can compromise the integrity of the site itself
+or of the site's users. A comprehensive study of this matter is
+beyond the scope of this document, and authors are strongly
+encouraged to study the matter in more detail. However, this section
+attempts to provide a quick introduction to some common pitfalls in
+HTML application development. The security model of the Web is based
+on the concept of "origins", and correspondingly many of the
+potential attacks on the Web involve cross-origin actions.</pre>
 					</div>
 				</fieldset>
 			</form>
@@ -160,9 +162,27 @@ many of the potential attacks on the Web involve cross-origin actions.</pre>
 					a class is like this <code>[aeiou]</code>, the square brackets mark the class, everything in between is what will be searched for, here it is 
 					all vocals.<br/>
 					this means the class above searches for one character out of <code>a</code> or <code>e</code> or <code>i</code> <br/>
-					classes can be negated, so anything but an <strong>a</strong> could be constructed like so <code>[^a]</code> in some dialects also <code>[!a]</code><br/>
-					class contents can be written like this: <code>[01234567]</code> which would match a single character that is a numbers between <strong>0</strong> and
-					<strong>9</strong> or it could be shortened like that <code>[0-7]</code>
+				</p>
+
+				<h3>Class Ranges</h3>
+
+				<p>
+					class contents can be written like this: <code>[01234567]</code> which would match a <strong>single character</strong> that is any number
+					between <strong>0</strong> and <strong>9</strong>
+				</p>
+
+				<p class="attention">
+				 	This can be abbreviated like that <code>[0-7]</code>
+				</p>
+
+				<h3>Class Negation</h3>
+
+				<p>
+					classes can be negated, so anything but an <strong>a</strong> could be constructed like so
+				</p>
+
+				<p class="attention">
+					<code>[^a]</code> in some dialects also <code>[!a]</code><br/>
 				</p>
 
 

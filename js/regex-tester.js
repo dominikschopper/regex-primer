@@ -61,7 +61,7 @@ var testReOnCLick = (function () {
 		if (el.value) {
 			return el.value;
 		}
-		return el.innerText;
+		return el.textContent;
 	}
 
 	return function regexTest(ev) {

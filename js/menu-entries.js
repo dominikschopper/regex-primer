@@ -3,7 +3,6 @@
  */
 
 
-
 (function() {
 
 
@@ -42,8 +41,8 @@
 	var defaultTitle = 'No Title Found!!';
 
 	function getHeaderTitle(header) {
-		if (header.innerText &&  /\w/.test(header.innerText)) {
-			return header.innerText;
+		if (header.textContent &&  /\w/.test(header.innerText)) {
+			return header.textContent;
 		}
 		return defaultTitle;
 	}
@@ -57,7 +56,7 @@
 	var toc = '';
 
 	if (headers.length > 0) {
-		insert.innerHTML = '';
+		insert.textContent = '';
 	}
 
 	for (var i=0; i<headers.length; i+=1) {
