@@ -645,14 +645,14 @@ nequee!!! Laborriosam ammet rerum, dicta quos quas expedita!</pre>
 
 			<p>
 				but the backreference brackets alsow have the feature of grouping port of a pattern and you can alternate bewtween different patterns within a bracket
-				with the help of a logical or with the <code>|</code><br/>
+				with the help of a logical or with the <code>(abc<strong>|</strong>def)</code><br/>
 				so e.g. this pattern will match all url starting either with <strong>http</strong> or <strong>ftp</strong> <code>(http|ftp)://.*</code>
 			</p>
 
 
 			<form action="#" class="pure-form pure-form-aligned regex-test-form">
 				<fieldset>
-					<legend>Trial for backreferences with or</legend>
+					<legend>Trial for backreferences with "either|or"</legend>
 					<div class="pure-control-group">
 						<label for="exc-trial3-regex">Regex</label>
 						<input class="regex" type="text" value="^(https?|ftp)://[^/]+/" id="exc-trial3-regex" size="25" />
