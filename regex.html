@@ -201,6 +201,36 @@ potential attacks on the Web involve cross-origin actions.</pre>
 					a <code>p</code> followed by a <code>r</code> followed by a <code>e</code> then either a <code>d</code> or a <code>t</code>
 				</p>
 
+
+
+
+				<h3>Predefined Classes</h3>
+
+				<p>this depends on the programm providing the regex, but most editors etc. provide some predefined classes for</p>
+
+				<dl>
+					<dt><code>.</code></dt>
+					<dd>any character at all doesn't matter what: <code>.</code> very important</dd>
+					
+					<dt><code>\d</code></dt>
+					<dd>Numbers/Decimals: <code>[0123456789]</code> or shorter <code>[0-9]</code> or predefined <code>\d</code></dd>
+					
+					<dt><code>\D</code></dt>
+					<dd>Not a number: <code>[^0-9]</code> or predefined <code>\D</code></dd>
+					
+					<dt><code>\w</code></dt>
+					<dd>Word characters: <code>[A-Za-z0-9_]</code> would be <code>\w</code></dd>
+					
+					<dt><code>\W</code></dt>
+					<dd>Not a word character: <code>[^A-Za-z0-9_]</code> would be <code>\W</code></dd>
+					
+					<dt><code>\s</code></dt>
+					<dd>Whitespace: <code>[ \t\v\r\n\f]</code> would be <code>\s</code> (\v being a vertical tab, never encountered one, but it should be whitespace according to documentation ;) \f is formfeed ... ditto)</dd>
+					
+					<dt><code>\S</code></dt>
+					<dd>Not a whitespace: <code>[^ \t\v\r\n]</code> would be <code>\S</code></dd>
+				</dl>
+
 				<h3>Trial</h3>
 
 			<form action="#" class="pure-form pure-form-aligned regex-test-form">
@@ -243,36 +273,6 @@ objectivism and Lacanist obscurity.</pre>
 			</form>
 
 
-
-			<h3>predefined classes</h3>
-
-			<p>this depends on the programm providing the regex, but most editors etc. provide some predefined classes for</p>
-
-			<dl>
-				<dt><code>.</code></dt>
-				<dd>any character at all doesnt matter what: <code>.</code> very important</dd>
-				
-				<dt><code>\d</code></dt>
-				<dd>Numbers/Decimals: <code>[0123456789]</code> or shorter <code>[0-9]</code> or predefined <code>\d</code></dd>
-				
-				<dt><code>\D</code></dt>
-				<dd>Not a number: <code>[^0-9]</code> or predefined <code>\D</code></dd>
-				
-				<dt><code>\w</code></dt>
-				<dd>Word characters: <code>[A-Za-z0-9_]</code> would be <code>\w</code></dd>
-				
-				<dt><code>\W</code></dt>
-				<dd>Not a word character: <code>[^A-Za-z0-9_]</code> would be <code>\W</code></dd>
-				
-				<dt><code>\s</code></dt>
-				<dd>Whitespace: <code>[ \t\v\r\n\f]</code> would be <code>\s</code> (\v being a vertical tab, never encountered one, but it should be whitespace according to documentation ;) \f is formfeed ... ditto)</dd>
-				
-				<dt><code>\S</code></dt>
-				<dd>Not a whitespace: <code>[^ \t\v\r\n]</code> would be <code>\S</code></dd>
-			</dl>
-
-
-
 			<h2 id="jump-quantifiers">Quantifiers</h2>
 
 			<p>a quantifier is yet another special character in the regex zoo and tells us how often a character (or class) may occur.</p>
@@ -287,7 +287,7 @@ objectivism and Lacanist obscurity.</pre>
 
 			<p>or <code>a{1,}</code> means at least 1 a up to as many as you like so it would match <code>K<span class="re-match">a</span>n<span class="re-match">aa</span>n</code> or even <code><span class="re-match">aaaaaaaaaaaaaaaaaaa</span>hhh!!!</code></p>
 
-			<h3>predefined quantifiers</h3>
+			<h3>Predefined Quantifiers</h3>
 
 			<dl>
 				<dt><code>?</code></dt>
@@ -560,8 +560,8 @@ numquam ab eius <U class="test">facere maiores</U> mollitia temporibus</blockquo
 <li>Earum accusantium</li>
 </ul>
 <img data-hrc="test me" src="./test/wolf.png" alt="not a werewolf" />
-<pre>facere veniam. <I>Possimus maiores</I> laudantium vel
-ullam corporis!</pre>
+<pre>facere veniam. <I>Possimus maiores</I> laudantium
+vel ullam corporis!</pre>
 </textarea>
 						</div>
 					</fieldset>
@@ -569,6 +569,126 @@ ullam corporis!</pre>
 			</li>
 
 		</ol>
+
+
+
+		<h2>Backreferences</h2>
+
+			<p>
+				Backreferences in regex are a fashion of
+			</p>
+
+			<ul>
+				<li>
+					storing parts of the match <strong>and</strong>
+				</li>
+				<li>
+					referencing to it <strong>and also</strong>
+				</li>
+				<li>
+					.
+				</li>
+			</ul>
+		
+			<p>
+				a backreference is done with a normal round bracket. And can be backreferenced as <code>\N</code> where <code>N</code> is the number
+				of the bracket (counting the left, opening bracket), so e.g. to capture all double letters we could write it like that 
+				<code>(.)\1</code>. So this pattern will match <strong>any repeated character</strong>
+			</p>
+
+			<p>
+				if we have two backreferences, then we will work with <code>\1</code> and <code>\2</code><br/>
+				e.g. <code>(.)(.).*\2\1</code> would match any two characters, that are repeated on the same line in inverted order
+			</p>
+
+			<p class="attention">
+				for search and replace actions the partial match is often called <code>$1</code> or <code>$2</code> whereas repeating the backref. in the
+				regex itself is done with <code>\1</code> and <code>\2</code>
+			</p>
+
+			<form action="#" class="pure-form pure-form-aligned regex-test-form">
+				<fieldset>
+					<legend>Trial for simple backreferences</legend>
+					<div class="pure-control-group">
+						<label for="exc-trial2-regex">Regex</label>
+						<input class="regex" type="text" value="(.)(.).*\2\1" id="exc-trial2-regex" />
+						
+					</div>
+					<div class="pure-control-group">
+						<label for="">Modifiers</label>
+		
+						<label for="mod-exc-trial2-g" class="pure-checkbox">
+							<input type="checkbox" id="mod-exc-trial2-g" value="g" checked />
+							global search
+						</label>
+						<label for="mod-exc-trial2-i" class="pure-checkbox">
+							<input type="checkbox" id="mod-exc-trial2-i" value="i" />
+							ignore case
+						</label>
+					</div>
+					
+					<div class="pure-control-group">
+						<label></label>
+						<button class="pure-button regex-test" data-inputid="#exc-trial2-input" data-regexid="#exc-trial2-regex" data-modifierids="#mod-exc-trial2-g|#mod-exc-trial2-i">apply</button>
+					</div>
+
+					<div class="pure-control-group">
+						<label>Test Input</label>
+						<pre id="exc-trial2-input" class="regex-input">Lorem ipsum dollor siit amet,
+consectettur adipisicing ellit.  Quas quibusdamm velitt,
+debitiis, doloree verro ex maximme inventorre, corporis
+eaquee eligenndi cumque provident aut vitae perspiciiatis
+nequee!!! Laborriosam ammet rerum, dicta quos quas expedita!</pre>
+					</div>
+				</fieldset>
+			</form>
+
+			<p>
+				but the backreference brackets alsow have the feature of grouping port of a pattern and you can alternate bewtween different patterns within a bracket
+				with the help of a logical or with the <code>|</code><br/>
+				so e.g. this pattern will match all url starting either with <strong>http</strong> or <strong>ftp</strong> <code>(http|ftp)://.*</code>
+			</p>
+
+
+			<form action="#" class="pure-form pure-form-aligned regex-test-form">
+				<fieldset>
+					<legend>Trial for backreferences with or</legend>
+					<div class="pure-control-group">
+						<label for="exc-trial3-regex">Regex</label>
+						<input class="regex" type="text" value="^(https?|ftp)://[^/]+/" id="exc-trial3-regex" size="25" />
+						
+					</div>
+					<div class="pure-control-group">
+						<label for="">Modifiers</label>
+		
+						<label for="mod-exc-trial3-g" class="pure-checkbox">
+							<input type="checkbox" id="mod-exc-trial3-g" value="g" />
+							global search
+						</label>
+						<label for="mod-exc-trial3-i" class="pure-checkbox">
+							<input type="checkbox" id="mod-exc-trial3-i" value="i" />
+							ignore case
+						</label>
+					</div>
+					
+					<div class="pure-control-group">
+						<label></label>
+						<button class="pure-button regex-test" data-inputid="#exc-trial3-input" data-regexid="#exc-trial3-regex" data-modifierids="#mod-exc-trial3-g|#mod-exc-trial3-i">apply</button>
+					</div>
+
+					<div class="pure-control-group">
+						<label>Test Input</label>
+						<pre id="exc-trial3-input" class="regex-input">tcp://127.0.0.1:123
+https://www.wotever.com/
+ftp://ftp.pub.com/
+http://this.is.is/where?there
+sftp://user@ssh.server/some/dir
+http://user:pass@www.somewhere.com/index.html</pre>
+					</div>
+				</fieldset>
+			</form>
+
+
 
 		</div>
 		</div>

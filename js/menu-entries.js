@@ -28,7 +28,7 @@
 	var autoidNo = 0;
 
 	function getAutoId() {
-		return `#jump-to-${autoidNo++}`;		
+		return `jump-to-${autoidNo++}`;		
 	}
 
 	function getHeaderId(header) {

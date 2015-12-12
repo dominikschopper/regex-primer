@@ -75,8 +75,13 @@
 			border-radius: 0.125em;
 		}
 		.re-match {
-			font-weight: bold;
-			background-color: rgba(255, 124, 124, 0.5);
+				display: inline-block;
+			    margin: 0 1px;
+
+			    border-left: 1px solid rgb(0, 100, 0);
+			    border-right: 1px solid rgb(0, 100, 0);
+			    font-weight: bold;
+			    background-color: rgba(255, 124, 124, 0.5);
 		}
 		.regex-input {
 			font-family: "Courier New", Courier, monospace;
