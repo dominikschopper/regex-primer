@@ -695,7 +695,9 @@ http://user:pass@www.somewhere.com/index.html</pre>
 
 			<p class="attention">
 				for search and replace actions the partial match is often called <code>$1</code> or <code>$2</code>, whereas repeating the backref. in the
-				regex itself is often done with <code>\1</code> and <code>\2</code>
+				regex itself is often done with <code>\1</code> and <code>\2</code><br/>
+				so e.g. this pattern <code>.*href="([^""]+)".*</code> with this replacement <code>$1</code> would replace the whole line with the content of
+				the first href attribute.
 			</p>
 
 			<p>
@@ -716,7 +718,7 @@ http://user:pass@www.somewhere.com/index.html</pre>
 					
 					<div class="pure-control-group">
 						<label>Replace match with</label>
-						<input size="36" class="regex" id="exc-trial4-insert" type="text" value="">
+						<input size="36" class="regex" id="exc-trial4-insert" type="text" value="<b>$1</b>">
 					</div>
 
 					<div class="pure-control-group">
