@@ -601,11 +601,6 @@ vel ullam corporis!</pre>
 				e.g. <code>(.)(.).*\2\1</code> would match any two characters, that are repeated on the same line in inverted order
 			</p>
 
-			<p class="attention">
-				for search and replace actions the partial match is often called <code>$1</code> or <code>$2</code> whereas repeating the backref. in the
-				regex itself is done with <code>\1</code> and <code>\2</code>
-			</p>
-
 			<form action="#" class="pure-form pure-form-aligned regex-test-form">
 				<fieldset>
 					<legend>Trial for simple backreferences</legend>
@@ -643,10 +638,11 @@ nequee!!! Laborriosam ammet rerum, dicta quos quas expedita!</pre>
 				</fieldset>
 			</form>
 
+
 			<p>
 				but the backreference brackets alsow have the feature of grouping port of a pattern and you can alternate bewtween different patterns within a bracket
 				with the help of a logical or with the <code>(abc<strong>|</strong>def)</code><br/>
-				so e.g. this pattern will match all url starting either with <strong>http</strong> or <strong>ftp</strong> <code>(http|ftp)://.*</code>
+				so e.g. this pattern will match all url starting either with <strong>http://...</strong> or <strong>ftp://...</strong> <code>(http|ftp)://.*</code>
 			</p>
 
 
@@ -673,7 +669,10 @@ nequee!!! Laborriosam ammet rerum, dicta quos quas expedita!</pre>
 					
 					<div class="pure-control-group">
 						<label></label>
-						<button class="pure-button regex-test" data-inputid="#exc-trial3-input" data-regexid="#exc-trial3-regex" data-modifierids="#mod-exc-trial3-g|#mod-exc-trial3-i">apply</button>
+						<button class="pure-button regex-test" 
+							data-inputid="#exc-trial3-input" 
+							data-regexid="#exc-trial3-regex" 
+							data-modifierids="#mod-exc-trial3-g|#mod-exc-trial3-i">apply</button>
 					</div>
 
 					<div class="pure-control-group">
@@ -684,6 +683,71 @@ ftp://ftp.pub.com/
 http://this.is.is/where?there
 sftp://user@ssh.server/some/dir
 http://user:pass@www.somewhere.com/index.html</pre>
+					</div>
+				</fieldset>
+			</form>
+
+
+			<h3>Search and Replace</h3>
+			<p>
+				regex does its best though when used in search and replace ... so now we can start to play with replacing too
+			</p>
+
+			<p class="attention">
+				for search and replace actions the partial match is often called <code>$1</code> or <code>$2</code>, whereas repeating the backref. in the
+				regex itself is often done with <code>\1</code> and <code>\2</code>
+			</p>
+
+			<p>
+				so try to replace three consonants with two consonants, if the three consonants are followed by a vocal (or an Umlaut ä ö ü) - this
+				has been the correct spelling in german until 1996, nowadays three consonants are allowed anywhere. Basically you will try to recreate
+				the old german spelling (although i favour the simpler new one ;))
+			</p>
+
+			
+			<form action="#" class="pure-form pure-form-aligned regex-test-form">
+				<fieldset>
+					<legend>Trial for replacing</legend>
+					<div class="pure-control-group">
+						<label for="exc-trial4-regex">Regex</label>
+						<input size="36" class="regex" type="text" value="(.)" id="exc-trial4-regex" size="25" />
+						
+					</div>
+					
+					<div class="pure-control-group">
+						<label>Replace match with</label>
+						<input size="36" class="regex" id="exc-trial4-insert" type="text" value="<span class='re-match'>$&</span>">
+					</div>
+
+					<div class="pure-control-group">
+						<label for="">Modifiers</label>
+		
+						<label for="mod-exc-trial4-g" class="pure-checkbox">
+							<input type="checkbox" id="mod-exc-trial4-g" value="g" />
+							global search
+						</label>
+						<label for="mod-exc-trial4-i" class="pure-checkbox">
+							<input type="checkbox" id="mod-exc-trial4-i" value="i" />
+							ignore case
+						</label>
+					</div>
+					
+					<div class="pure-control-group">
+						<label></label>
+						<button class="pure-button regex-test" 
+							data-inputid="#exc-trial4-input" 
+							data-regexid="#exc-trial4-regex" 
+							data-modifierids="#mod-exc-trial4-g|#mod-exc-trial4-i"
+							data-insertinstead="#exc-trial4-insert">apply</button>
+					</div>
+
+					<div class="pure-control-group">
+						<label>Test Input (not all words are spelled correctly ;))</label>
+						<pre id="exc-trial4-input" class="regex-input">Schifffahrt, Stimmmeister,
+Balletttänzerin, Stofffetzen, Aaargh,
+Schifffracht, Kaputtt, Brummmeister, Bruchhügel
+Stammmanschaft, Krummholz,
+Ruuuhe!</pre>
 					</div>
 				</fieldset>
 			</form>
