@@ -74,7 +74,13 @@ var testReOnCLick = (function () {
 		var modifierids = this.dataset.modifierids ?  this.dataset.modifierids.split('|') : [];
 
 		// what should we insert? $& contains the complete match!
-		var insertAtMatch = this.dataset.insertinstead ? document.querySelector(this.dataset.insertinstead).value : '<span class="re-match">$&</span>';
+		var insertAtMatch = '<span class="re-match">$&</span>';
+		if (this.dataset.insertinstead) {
+			var insertElement = document.querySelector(this.dataset.insertinstead)
+			if (insertElement && insertElement.value.length > 0) {
+				insertAtMatch = insertElement.value
+			}
+		}
 
 		for (var i in modifierids) {
 			mods += getModifierFromCheckbox(modifierids[i]);
