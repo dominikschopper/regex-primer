@@ -5,4 +5,6 @@ this is not a real course, but just a small recollection of things i need to tel
 
 also a little fiddling is done with html, so you can try out what you got there ;)
 
+this primer is online available at http://dominikschopper.github.io/regex-primer/regex.html thanks to github pages 
+
 This is still work in progress ...
